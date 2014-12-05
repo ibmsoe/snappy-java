@@ -40,6 +40,7 @@ $(SNAPPY_ARCHIVE):
 $(SNAPPY_UNPACKED): $(SNAPPY_ARCHIVE)
 	$(TAR) xvfz $< -C $(TARGET)	
 	touch $@
+	grep ppc64le $(SNAPPY_SRC_DIR)/config.guess || sed -i '/ppc64/i\    ppc64le:Linux:*:*)\n\techo powerpc64le-unknown-linux-gnu\n\texit ;;' $(SNAPPY_SRC_DIR)/config.guess
 	cd  $(SNAPPY_SRC_DIR) && ./configure
 
 $(SNAPPY_GIT_UNPACKED):
